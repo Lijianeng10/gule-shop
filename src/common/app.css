@@ -1,0 +1,11 @@
+/*返回按钮*/
+.el-icon-d-arrow-left{
+    width: 28px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.4);
+    color: #ffffff;
+    border-radius: 100%;
+    font-size: 14px;
+}
