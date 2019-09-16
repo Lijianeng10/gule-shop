@@ -17,19 +17,19 @@
         <p class="now-price">￥{{ detailData[1] }}</p>
         <p class="old-price">原价：<del>￥{{ detailData[1] }}</del></p>
         <div class="delivery">
-          <p class="delivery-left">包邮</p>
+          <p class="delivery-left">所在地</p>
           <p class="delivery-right">贵阳</p>
         </div>
       </div>
       <div class="sale" @click="showSale">
-        <p class="sale-left">本店活动</p>
+        <p class="sale-left">平台活动</p>
         <p class="arrow-right"><span class="el-icon-arrow-right"></span></p>
       </div>
       <div class="promise"  @click="showServer">
         <div class="promise-container">
-          <p class="promise1"><span class="el-icon-circle-check"></span>运费险</p>
-          <p class="promise2"><span class="el-icon-circle-check"></span>七天退货</p>
-          <p class="promise3"><span class="el-icon-circle-check"></span>正品保证</p>
+          <p class="promise1"><span class="el-icon-circle-check"></span>专业保证</p>
+          <p class="promise2"><span class="el-icon-circle-check"></span>及时反馈</p>
+          <p class="promise3"><span class="el-icon-circle-check"></span>售后保证</p>
         </div>
         <p class="arrow-right"><span class="el-icon-arrow-right"></span></p>
       </div>

@@ -6,27 +6,27 @@
         </div>
       </div>
       <div class="content">
-         <p class="title">本店活动</p>
+         <p class="title">平台活动</p>
          <ul>
              <li>
                  <img src="./icon1.png" >
                  <div class="text">
-                     <p class="title">赠运费险</p>
-                     <p>商家为您购买商品投保退货运费险</p>
+                     <p class="title">专业保证</p>
+                     <p>所提供的服务均提供专业保证</p>
                  </div>
              </li>
              <li>
                  <img src="./icon2.png" >
                  <div class="text">
-                     <p class="title">赠运费险</p>
-                     <p>商家为您购买商品投保退货运费险</p>
+                     <p class="title">及时反馈</p>
+                     <p>所提供的服务均在第一时间反馈到客户</p>
                  </div>
              </li>
              <li>
                  <img src="./icon3.png" >
                  <div class="text">
-                     <p class="title">赠运费险</p>
-                     <p>商家为您购买商品投保退货运费险</p>
+                     <p class="title">售后保证</p>
+                     <p>所提供的服务均提供完善的售后服务</p>
                  </div>
              </li>   
          </ul>

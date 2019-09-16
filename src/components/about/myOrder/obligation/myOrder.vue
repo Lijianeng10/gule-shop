@@ -337,7 +337,7 @@ li{
             width: 65%;
             float: left;
             height: 50px;
-            text-align: center;
+            text-align: left;
             font-size: 0;
             margin: 0;
             border: none;

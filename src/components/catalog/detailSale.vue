@@ -6,9 +6,9 @@
         </div>
       </div>
       <div class="content">
-         <p class="title">本店活动</p>
-         <p>1.全场满88享受9.5折优惠；</p>
-         <p>2.全场满188享受8.5折优惠；</p>
+         <p class="title">平台活动</p>
+         <p>1.全场满50000享受9.5折优惠；</p>
+         <p>2.全场满100000享受9折优惠；</p>
          <button>确定</button>
       </div>
   </div>
