@@ -78,7 +78,7 @@
                         };
                         //重新定义作用域，每多一层func 需要重新定义this指向
                         const that = this;
-                        this.axios.post('http://119.23.239.189/front/user/login', strData).then(function (response) {
+                        this.axios.post('/api/front/user/login', strData).then(function (response) {
                             //重新this定义作用域，每多一层func 需要重新定义this指向
                             const that_ = that;
                             if(response.data.code !=600){

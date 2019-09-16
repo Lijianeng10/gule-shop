@@ -22,6 +22,17 @@ Vue.use(MintUI)
 Vue.use(ElementUI)
 Vue.use(Qs)
 
+
+
+// Vue.prototype.mintUI = MintUI
+import { Toast } from 'mint-ui'
+import { MessageBox } from 'mint-ui'
+Vue.prototype.mintUI = {
+    Toast,
+    MessageBox
+}
+
+
 var axios_instance = axios.create({
     // baseURL:'http://localhost',
     transformRequest: [function (data) {
@@ -47,6 +58,7 @@ import about from './components/about/about'
 import myHome from './components/about/home'
 import orderList from './components/about/orderList'
 import obligation from './components/about/myOrder/obligation/obligation'//待付款
+import myOrder from './components/about/myOrder/obligation/myOrder'
 import delivery from './components/about/myOrder/delivery/delivery'//待发货
 import harvest from './components/about/myOrder/harvest/harvest'//待收货
 import ratings from './components/about/myOrder/ratings/ratings'//已完成
@@ -81,6 +93,7 @@ const routes = [
         children: [
             {path: '/about/orderList', redirect: '/about/orderList/obligation'},
             {path: '/about/orderList/obligation', component: obligation},
+            {path: '/about/orderList/obligation/myOrder/:pid', name: 'myOrder', component: myOrder},
             {path: '/about/orderList/delivery', component: delivery},
             {path: '/about/orderList/harvest', component: harvest},
             {path: '/about/orderList/ratings', component: ratings},

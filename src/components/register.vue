@@ -92,7 +92,7 @@
                             'surePwd':this.ruleForm2.checkPass
                         };
                         const that = this;
-                        this.axios.post('http://119.23.239.189/front/user/register',strData).then(function (response) {
+                        this.axios.post('/api/front/user/register',strData).then(function (response) {
                             const that_ = that;
                             if(response.data.code !=600){
                                 that.$alert(response.data.msg, '提示', {

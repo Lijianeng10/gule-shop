@@ -79,11 +79,11 @@
             },
         },
         mounted: function () {
-            // this.distinguish()
+            this.distinguish()
             var that = this
             this.loading = true
             //请求产品列表
-            this.axios.post('http://119.23.239.189/front/product/get-hot-product').then(function (response) {
+            this.axios.post('/api/front/product/get-hot-product').then(function (response) {
                 that.loading = false
                 var data = response.data.result;
                 for (var i = 0; i < data.length; i++) {
@@ -93,7 +93,7 @@
               console.log(error)
             })
             // banner
-            this.axios.post('http://119.23.239.189/front/public/get-banner').then(function (response) {
+            this.axios.post('/api/front/public/get-banner').then(function (response) {
                 that.nums =0;
                 for (var i = 0; i < response.data.result.length; i++) {
                     that.banners.push({

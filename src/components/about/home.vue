@@ -139,10 +139,10 @@ export default {
       var strData = {
           'token':token
       }
-      this.axios.post('http://119.23.239.189/front/user/get-user-detail', strData).then(function (response) {
-          if(response.data.code!=600){
-              that.$router.push({'path':'/login'})
-          }else{
+      this.axios.post('/api/front/user/get-user-detail', strData).then(function (response) {
+          // if(response.data.code!=600){
+          //     that.$router.push({'path':'/login'})
+          // }else{
               that.user = response.data.result.nickname;
               if( response.data.result.pic===''){
                   that.pic ='/static/images/head.jpg';
@@ -150,10 +150,10 @@ export default {
                   that.pic = response.data.result.pic;
               }
               localStorage.setItem('userDetail',JSON.stringify(response.data.result));
-          }
+          // }
       })
       //获取订单数据
-      this.axios.post('http://119.23.239.189/front/order/get-user-order-num', strData).then(function (response) {
+      this.axios.post('/api/front/order/get-user-order-num', strData).then(function (response) {
           var result = response.data.result;
           that.stayPay = result.stayPay!==null?result.stayPay:0;
           that.staySend = result.staySend!==null?result.staySend:0;

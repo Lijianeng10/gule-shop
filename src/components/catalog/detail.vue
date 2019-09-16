@@ -69,7 +69,10 @@ export default {
   },
   methods: {
     buyNow () {
-      this.addCart()
+        var pidAry = [];
+        pidAry.push(this.$route.params.gid);
+        this.$router.push('/about/orderList/obligation/myOrder/'+pidAry)
+      // this.addCart()
     },
     showSale () {
       this.$refs.detailSale.showSale()
@@ -80,56 +83,6 @@ export default {
     showGoods () {
       this.$refs.detailGoods.showGoods()
     },
-    addCart1 () {
-      var that = this
-      that.axios.post('http://www.ethedot.com/chatshop/Index/car', {
-        id: sessionStorage.getItem('id')
-      })
-      .then(function (response) {
-        if (response.data.length > 0) {
-          var arr = []
-          for (var i = 0; i < response.data.length; i++) {
-            arr.push(response.data[i].gid)
-          }
-          if (arr.indexOf(that.gid) < 0) {
-            that.axios.post('http://www.ethedot.com/chatshop/Index/caozuo', {
-              gid: that.gid,
-              id: sessionStorage.getItem('id')
-            })
-            .then(function (response) {
-              if (response.data === 1) {
-                that.$router.push('/cart')
-              } else if (response.data === 2) {
-                alert('添加失败！')
-              }
-            })
-            .catch(function (error) {
-              console.log(error)
-            })
-          } else {
-            that.$router.push('/cart')
-          }
-        } else {
-          that.axios.post('http://www.ethedot.com/chatshop/Index/caozuo', {
-            gid: that.gid,
-            id: sessionStorage.getItem('id')
-          })
-          .then(function (response) {
-            if (response.data === 1) {
-              that.$router.push('/cart')
-            } else if (response.data === 2) {
-              alert('添加失败！')
-            }
-          })
-          .catch(function (error) {
-            console.log(error)
-          })
-        }
-      })
-      .catch(function (error) {
-        console.log(error)
-      })
-    },
 
       addCart:function() {
           var that = this
@@ -138,13 +91,11 @@ export default {
               'product_id':this.$route.params.gid ,
               'type':1
           };
-          this.axios.post('http://119.23.239.189/front/user/opt-user-shop-car', strData).then(function (response) {
+          this.axios.post('/api/front/user/opt-user-shop-car', strData).then(function (response) {
               //重新this定义作用域，每多一层func 需要重新定义this指向
               const that_ = that;
               if(response.data.code !=600){
-                  that.$alert(response.data.msg, '提示', {
-                      confirmButtonText: '确定',
-                  });
+                  that.mintUI.Toast(response.data.msg);
               }else{
                   that.$alert(response.data.msg, '提示', {
                       confirmButtonText: '确定',
@@ -167,7 +118,7 @@ export default {
       let strData = {
           'productId': this.$route.params.gid,
       };
-    this.axios.post('http://119.23.239.189/front/product/get-product-detail',strData).then(function (response) {
+    this.axios.post('/api/front/product/get-product-detail',strData).then(function (response) {
         if(response.data.code===600){
             var data = response.data.result;
             if(data!==''){

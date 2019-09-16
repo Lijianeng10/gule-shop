@@ -8,7 +8,9 @@
     <div class="container">
       <div class="noGoods" v-show="goods.length === 0">
         <img src="./bag.png" alt="">
-        <p>购物车空空哒</p>
+        <p @click="toastTest">购物车空空哒</p>
+        <br><br><br><br><br><br><br>
+        <!--<button @click="toastTest">点击</button>-->
         <button><router-link to="/catalog">开始购物</router-link></button>
       </div>
       <li v-for="(item, key) in goods" :key="item.id">
@@ -36,6 +38,7 @@
   </div>
 </template>
 <script>
+
 export default {
   data () {
     return {
@@ -48,53 +51,73 @@ export default {
     }
   },
   methods: {
+      toastTest(){
+          this.mintUI.MessageBox({
+              title: '提示',
+              message: '确定执行此操作?',
+              showCancelButton: true
+          });
+      },
       //下单
     buy () {
-      var that = this
-      var goods = this.goods
-        var goods_nums = 0;
-        var order_money = 0;
-      for (let i = 0; i < goods.length; i++) {
-        if (goods[i].status === true) {
-          this.menu.push({
-              product_id: goods[i].gid,
-              nums: goods[i].counter,
-
-          })
-            goods_nums +=goods[i].counter;
-            order_money +=goods[i].counter*goods[i].price
-        }
-      }
-      if (this.menu.length !== 0) {
-          let strData = {
-              'token': localStorage.getItem('token'),
-              concent: that.menu,
-              goods_nums:goods_nums,
-              order_money:order_money
-          }
-        this.axios.post('http://119.23.239.189/front/order/play-order',strData).then(function (response) {
-            const that_ = that;
-            if(response.data.code !=600){
-                that.$alert(response.data.msg, '提示', {
-                    confirmButtonText: '确定',
-                });
-            }else{
-                that.$alert(response.data.msg, '提示', {
-                    confirmButtonText: '确定',
-                    callback: action => {
-                        that.$router.push('/about');
-                    }
-                });
+        var pidAry = [];
+        for (let i = 0; i < this.goods.length; i++) {
+            if (this.goods[i].status === true) {
+                pidAry.push(this.goods[i].gid)
             }
-        })
-        .catch(function (error) {
-          console.log(error)
-        })
-      }else{
-          this.$alert('请选择需要购买的产品！', '提示', {
-              confirmButtonText: '确定',
-          });
-      }
+        }
+        if (pidAry.length == 0) {
+            this.$alert('请选择需要购买的产品！', '提示', {
+                confirmButtonText: '确定',
+            });
+            return false;
+        }
+        this.$router.push('/about/orderList/obligation/myOrder/'+pidAry)
+    //   var that = this
+    //   var goods = this.goods
+    //     var goods_nums = 0;
+    //     var order_money = 0;
+    //   for (let i = 0; i < goods.length; i++) {
+    //     if (goods[i].status === true) {
+    //       this.menu.push({
+    //           product_id: goods[i].gid,
+    //           nums: goods[i].counter,
+    //
+    //       })
+    //         goods_nums +=goods[i].counter;
+    //         order_money +=goods[i].counter*goods[i].price
+    //     }
+    //   }
+    //   if (this.menu.length !== 0) {
+    //       let strData = {
+    //           'token': localStorage.getItem('token'),
+    //           concent: that.menu,
+    //           goods_nums:goods_nums,
+    //           order_money:order_money
+    //       }
+    //     this.axios.post('/api/front/order/play-order',strData).then(function (response) {
+    //         const that_ = that;
+    //         if(response.data.code !=600){
+    //             that.$alert(response.data.msg, '提示', {
+    //                 confirmButtonText: '确定',
+    //             });
+    //         }else{
+    //             that.$alert(response.data.msg, '提示', {
+    //                 confirmButtonText: '确定',
+    //                 callback: action => {
+    //                     that.$router.push('/about');
+    //                 }
+    //             });
+    //         }
+    //     })
+    //     .catch(function (error) {
+    //       console.log(error)
+    //     })
+    //   }else{
+    //       this.$alert('请选择需要购买的产品！', '提示', {
+    //           confirmButtonText: '确定',
+    //       });
+    //   }
     },
     mins (item) {
       if (item.counter <= 1) {
@@ -148,7 +171,7 @@ export default {
                 'product_id':item.gid ,
                 'type':3
             };
-            this.axios.post('http://119.23.239.189/front/user/opt-user-shop-car',strData).then(function (response) {
+            this.axios.post('/api/front/user/opt-user-shop-car',strData).then(function (response) {
                 const that_ = that;
                 if(response.data.code !=600){
                     that.$alert(response.data.msg, '提示', {
@@ -189,7 +212,7 @@ export default {
   mounted: function () {
     this.distinguish()
     var that = this
-    this.axios.post('http://119.23.239.189/front/user/get-shop-car-list', {
+    this.axios.post('/api/front/user/get-shop-car-list', {
         'token': localStorage.getItem('token')
     }).then(function (response) {
       var response = response.data.result

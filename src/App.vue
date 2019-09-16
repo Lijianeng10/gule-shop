@@ -30,22 +30,7 @@
         components: {
         },
         mounted: function () {
-            // var that = this
-            // this.show = false
-            // this.axios.get('http://www.ethedot.com/chatshop/Index/index')
-            // .then(function (response) {
-            //   console.log(response)
-            //   that.myArr.push(response.data.id, response.data.nickname, response.data.openid)
-            //   sessionStorage.setItem('id', that.myArr)
-            // })
-            // .catch(function (error) {
-            //   console.log(error)
-            // })
-            // if (sessionStorage.id === ',,') {
-            //   alert('身份过期，请重新登录！')
-            // }
-            // this.distinguish = 1
-            this.distinguish()
+            this.bindPhone()
         }
     }
 </script>

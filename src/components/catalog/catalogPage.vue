@@ -48,7 +48,7 @@ export default {
       this.activeName = item.catalog
       this.goods = []
       var that = this
-      this.axios.post('http://119.23.239.189/front/product/get-product-list', {
+      this.axios.post('/api/front/product/get-product-list', {
         id: item.tid
       }).then(function (response) {
           var data = response.data.result.data;
@@ -85,7 +85,7 @@ export default {
     this.distinguish()
     var that = this
     // 获取分类
-    this.axios.post('http://119.23.239.189/front/product/get-category-list').then(function (response) {
+    this.axios.post('/api/front/product/get-category-list').then(function (response) {
       that.loading = false
         var data = response.data.result;
       for (var i = 0; i < data.length; i++) {
@@ -99,7 +99,7 @@ export default {
     //   alert('身份过期，请重新登录！')
     // }
     // 获取商品
-    this.axios.post('http://119.23.239.189/front/product/get-product-list')
+    this.axios.post('/api/front/product/get-product-list')
     .then(function (response) {
         that.loading = false
         var data = response.data.result.data;

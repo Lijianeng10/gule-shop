@@ -94,7 +94,7 @@
                         };
                         //重新定义作用域，每多一层func 需要重新定义this指向
                         const that = this;
-                        this.axios.post('http://119.23.239.189/front/user/update-pwd', strData).then(function (response) {
+                        this.axios.post('/api/front/user/update-pwd', strData).then(function (response) {
                             //重新this定义作用域，每多一层func 需要重新定义this指向
                             const that_ = that;
                             if(response.data.code !=600){
@@ -137,7 +137,7 @@
                         'phone':phone,
                         'cType':4
                     }
-                    this.axios.post('http://119.23.239.189/front/user/get-sms-code', strData).then(function (response) {
+                    this.axios.post('/api/front/user/get-sms-code', strData).then(function (response) {
                         //重新this定义作用域，每多一层func 需要重新定义this指向
                         const that_ = that;
                         if(response.data.code !=600){

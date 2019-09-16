@@ -12,8 +12,8 @@
         <p><span class="con-text">手机号</span><span class="con-val">{{tel}}</span></p>
     </div>
     <div>
-        <el-button type="danger" icon="el-icon-edit"  style="width: 48%;margin-top: 10px;" v-on:click="editNname">修改昵称</el-button>
-        <el-button type="danger" icon="el-icon-error" style="width: 48%;margin-top: 10px;" v-on:click="loginOut">退出登录</el-button>
+        <!--<el-button type="danger" icon="el-icon-edit"  style="width: 48%;margin-top: 10px;" v-on:click="editNname">修改昵称</el-button>-->
+        <!--<el-button type="danger" icon="el-icon-error" style="width: 48%;margin-top: 10px;" v-on:click="loginOut">退出登录</el-button>-->
     </div>
 
     <!--<mt-cell title="退出登录" is-link > </mt-cell>-->
@@ -61,7 +61,7 @@ export default {
                       'token': localStorage.getItem('token'),
                       'nickname': value,
                   };
-                  this.axios.post('http://119.23.239.189/front/user/set-nickname', strData).then(function (response) {
+                  this.axios.post('/api/front/user/set-nickname', strData).then(function (response) {
                       //重新this定义作用域，每多一层func 需要重新定义this指向
                       const that_ = that;
                       if(response.data.code !=600){

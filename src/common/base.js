@@ -1,11 +1,48 @@
 exports.install = function (Vue, options) {
-  //验证登录
-  Vue.prototype.distinguish = function () {
-      var token = localStorage.getItem('token');
-      if(token === null){
-          this.$router.push({path: '/login'});
+  //验证是否绑定手机号
+  Vue.prototype.bindPhone = function () {
+      var userInfo = JSON.parse(this.$route.query.userInfo);
+      localStorage.setItem('token',userInfo.token);
+      localStorage.setItem('wxUserInfo',JSON.stringify(userInfo.wxUserInfo));
+      localStorage.setItem('phone',userInfo.mobile);
+      if(userInfo.mobile == ''||userInfo.mobile == null){
+          this.$prompt('请输入手机号', '绑定手机', {
+              confirmButtonText: '确定',
+              // cancelButtonText: '取消',
+              inputPattern: /^1[3456789]\d{9}$/,
+              inputErrorMessage: '手机格式不正确',
+              showClose:false,//是否显示左上角X
+              showCancelButton:false,//是否显示取消按钮
+              closeOnClickModal:false,
+          }).then(({ value }) => {
+              var strData = {
+                  'userTel':value,
+                  'wxUserInfo':JSON.stringify(userInfo.wxUserInfo),
+              }
+              const that = this;
+              this.axios.post('/api/front/user/bind-user-tel', strData).then(function (response) {
+                 //重新this定义作用域，每多一层func 需要重新定义this指向
+                  if(response.data.code !=600){
+                      that.$alert(response.data.msg, '提示', {
+                          confirmButtonText: '确定',
+                      });
+                  }else{
+                      that.$alert(response.data.msg, '提示', {
+                          confirmButtonText: '确定',
+                          callback: action => {
+                              //将登录成功的用户信息存储
+                              localStorage.setItem('phone',value);
+                          }
+                      });
+                  }
+              })
+        })
       }
   }
+  //验证是否登录
+    Vue.prototype.distinguish = function () {
+
+    }
   //获取用户详细信息
   Vue.prototype.getUserDetail = function () {
       var userDetail = localStorage.getItem('userDetail');
@@ -14,7 +51,7 @@ exports.install = function (Vue, options) {
           var strData = {
               'token':token
           }
-          this.axios.post('http://119.23.239.189/front/user/get-user-detail', strData).then(function (response) {
+          this.axios.post('/api/front/user/get-user-detail', strData).then(function (response) {
               localStorage.setItem('userDetail',JSON.stringify(response.data.result));
           })
       }
@@ -25,7 +62,7 @@ exports.install = function (Vue, options) {
         var strData = {
             'token':token
         }
-        this.axios.post('http://119.23.239.189/front/user/get-user-detail', strData).then(function (response) {
+        this.axios.post('/api/front/user/get-user-detail', strData).then(function (response) {
             localStorage.setItem('userDetail',JSON.stringify(response.data.result));
         })
     }

@@ -46,7 +46,7 @@ export default {
       num1: 1,
       show: false,
       goods: [],
-        loadingText:'加载中...',
+        loadingText: '暂无数据...',
         counter : 1, //当前页面
         num : 4,  // 一次显示多少条
     }
@@ -79,7 +79,7 @@ export default {
               'page': this.counter,
               'size':this.num
           };
-          this.axios.post('http://119.23.239.189/front/order/get-order-list',strData).then(function (response) {
+          this.axios.post('/api/front/order/get-order-list',strData).then(function (response) {
               if(response.data.code===400||response.data.code===402){
                   that.$router.push({'path':'/login'})
               }
